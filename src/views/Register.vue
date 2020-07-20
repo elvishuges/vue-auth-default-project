@@ -3,7 +3,7 @@
 <template>
   <div>
     <form class="login" @submit.prevent="login">
-      <h1>Sign innnnnn</h1>
+      <h1>Sign in</h1>
       <label>User name</label>
       <input required v-model="username" type="text" placeholder="Snoopy" />
       <label>Password</label>
