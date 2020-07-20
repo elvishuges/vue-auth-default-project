@@ -4,7 +4,7 @@ import {
   AUTH_SUCCESS,
   AUTH_LOGOUT
 } from "../actions/auth";
-import { USER_REQUEST } from "../actions/user";
+//import { USER_REQUEST } from "../actions/user";
 import api from "./../../services/api";
 
 const state = {
@@ -19,17 +19,19 @@ const getters = {
 };
 
 const actions = {
-  [AUTH_REQUEST]: ({ commit, dispatch }, user) => {
+  [AUTH_REQUEST]: ({ commit }, user) => {
+    console.log('*User*',user);
     return new Promise((resolve, reject) => {
       commit(AUTH_REQUEST);
-      api.login(user.email,user.senha)
+      api.login(user.username,user.password)
         .then(resp => {
-          localStorage.setItem("user-token", resp.token);
+          console.log('*resp*',resp);
+          localStorage.setItem("user-token", resp.data.token);
           // Here set the header of your ajax library to the token value.
           // example with axios
           // axios.defaults.headers.common['Authorization'] = resp.token
           commit(AUTH_SUCCESS, resp);
-          dispatch(USER_REQUEST);
+         // dispatch(USER_REQUEST);
           resolve(resp);
         })
         .catch(err => {
